@@ -16,7 +16,7 @@
 #include "camera.h"
 #include "basic_camera.h"
 #include "table_chair.h"
-
+#include "fan.h"
 #include <iostream>
 
 using namespace std;
@@ -815,7 +815,7 @@ int main()
 	//color attribute
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
 	glEnableVertexAttribArray(1);
-
+	int i = 0;
 	Table_Chair table_chair[16];
 	while (!glfwWindowShouldClose(window))
 	{
@@ -920,31 +920,11 @@ int main()
 		glBindVertexArray(VAOF1);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
-		model = transforamtion(2.125, 2.25, -5.875, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .5, .75, .5);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAOF2);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
-		model = transforamtion(2.125, 2.35, -5.625, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .5, .05, 2);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAOF3);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
-		model = transforamtion(2.125, 2.35, -6.875, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .5, .05, 2);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAOF3);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
-		model = transforamtion(2.375, 2.35, -5.875, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 2, .05, .5);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAOF3);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
-		model = transforamtion(1.125, 2.35, -5.875, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 2, .05, .5);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAOF3);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-
+		Fan fan;
+		/*ourShader = fan.local_rotation(ourShader, VAOF1, VAOF2, VAOF3);*/
+		
+		ourShader = fan.local_rotation(ourShader, VAOF2, VAOF3, i);
+		i++;
 		// render boxes
 		//for (unsigned int i = 0; i < 10; i++)
 		//{
