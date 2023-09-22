@@ -914,6 +914,7 @@ int main()
 		glBindVertexArray(VAOT);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
+		//Fan
 		model = transforamtion(2, 2.5, -6, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1, .5, 1);
 		ourShader.setMat4("model", model);
 		glBindVertexArray(VAOF1);
@@ -922,6 +923,26 @@ int main()
 		model = transforamtion(2.125, 2.25, -5.875, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .5, .75, .5);
 		ourShader.setMat4("model", model);
 		glBindVertexArray(VAOF2);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+		model = transforamtion(2.125, 2.35, -5.625, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .5, .05, 2);
+		ourShader.setMat4("model", model);
+		glBindVertexArray(VAOF3);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+		model = transforamtion(2.125, 2.35, -6.875, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .5, .05, 2);
+		ourShader.setMat4("model", model);
+		glBindVertexArray(VAOF3);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+		model = transforamtion(2.375, 2.35, -5.875, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 2, .05, .5);
+		ourShader.setMat4("model", model);
+		glBindVertexArray(VAOF3);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+		model = transforamtion(1.125, 2.35, -5.875, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 2, .05, .5);
+		ourShader.setMat4("model", model);
+		glBindVertexArray(VAOF3);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
 		// render boxes
