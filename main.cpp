@@ -30,9 +30,9 @@ const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 // modelling transform
-float rotateAngle_X = 45.0;
-float rotateAngle_Y = 45.0;
-float rotateAngle_Z = 45.0;
+float rotateAngle_X = 0;
+float rotateAngle_Y = 0;
+float rotateAngle_Z = 0;
 float rotateAxis_X = 0.0;
 float rotateAxis_Y = 0.0;
 float rotateAxis_Z = 1.0;
@@ -58,6 +58,17 @@ BasicCamera basic_camera(eyeX, eyeY, eyeZ, lookAtX, lookAtY, lookAtZ, V);
 float deltaTime = 0.0f;    // time between current frame and last frame
 float lastFrame = 0.0f;
 
+glm::mat4 transforamtion(float tx, float ty, float tz, float rx, float ry, float rz, float sx, float sy, float sz) {
+    glm::mat4 identityMatrix = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
+    glm::mat4 translateMatrix, rotateXMatrix, rotateYMatrix, rotateZMatrix, scaleMatrix, model;
+    translateMatrix = glm::translate(identityMatrix, glm::vec3(tx, ty, tz));
+    rotateXMatrix = glm::rotate(identityMatrix, glm::radians(rx), glm::vec3(1.0f, 0.0f, 0.0f));
+    rotateYMatrix = glm::rotate(identityMatrix, glm::radians(ry), glm::vec3(0.0f, 1.0f, 0.0f));
+    rotateZMatrix = glm::rotate(identityMatrix, glm::radians(rz), glm::vec3(0.0f, 0.0f, 1.0f));
+    scaleMatrix = glm::scale(identityMatrix, glm::vec3(sx, sy, sz));
+    model = translateMatrix * rotateXMatrix * rotateYMatrix * rotateZMatrix * scaleMatrix;
+    return model;
+}
 int main()
 {
     // glfw: initialize and configure
@@ -305,7 +316,7 @@ int main()
 
         // activate shader
         ourShader.use();
-
+        glm::mat4 model;
         // pass projection matrix to shader (note that in this case it could change every frame)
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         //glm::mat4 projection = glm::ortho(-2.0f, +2.0f, -1.5f, +1.5f, 0.1f, 100.0f);
@@ -317,14 +328,7 @@ int main()
         ourShader.setMat4("view", view);
 
         // Modelling Transformation
-        glm::mat4 identityMatrix = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-        glm::mat4 translateMatrix, rotateXMatrix, rotateYMatrix, rotateZMatrix, scaleMatrix, model;
-        translateMatrix = glm::translate(identityMatrix, glm::vec3(translate_X, translate_Y, translate_Z));
-        rotateXMatrix = glm::rotate(identityMatrix, glm::radians(rotateAngle_X), glm::vec3(1.0f, 0.0f, 0.0f));
-        rotateYMatrix = glm::rotate(identityMatrix, glm::radians(rotateAngle_Y), glm::vec3(0.0f, 1.0f, 0.0f));
-        rotateZMatrix = glm::rotate(identityMatrix, glm::radians(rotateAngle_Z), glm::vec3(0.0f, 0.0f, 1.0f));
-        scaleMatrix = glm::scale(identityMatrix, glm::vec3(scale_X, scale_Y, scale_Z));
-        model = translateMatrix * rotateXMatrix * rotateYMatrix * rotateZMatrix * scaleMatrix;
+        model = transforamtion(0,0,0,rotateAngle_X,rotateAngle_Y,rotateAngle_Z,1,1,1);
         ourShader.setMat4("model", model);
         //ourShader.setVec3("aColor", glm::vec3(0.2f, 0.1f, 0.4f));
 
