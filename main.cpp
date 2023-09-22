@@ -70,31 +70,6 @@ glm::mat4 transforamtion(float tx, float ty, float tz, float rx, float ry, float
 	return model;
 }
 
-unsigned int* vertex_array(float vertex[], unsigned int inx[]) {
-	unsigned int VBO, VAO, EBO;
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-
-	glBindVertexArray(VAO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex), vertex, GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(inx), inx, GL_STATIC_DRAW);
-
-
-	// position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-
-	//color attribute
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
-	glEnableVertexAttribArray(1);
-	unsigned int out[] = { VAO, VBO, EBO };
-	return out;
-}
 int main()
 {
 	// glfw: initialize and configure
@@ -236,6 +211,71 @@ int main()
 		0.5f, 0.0f, 0.5f, 0.39f, 0.3f, 0.0f,
 		0.0f, 0.0f, 0.5f, 0.39f, 0.3f, 0.0f
 	};
+	//.2f, .2f, .02f,
+	float chair_pillar[] = {
+		0.0f, 0.0f, 0.0f, .2f, .2f, .02f,
+		0.5f, 0.0f, 0.0f, .2f, .2f, .02f,
+		0.5f, 0.5f, 0.0f, .2f, .2f, .02f,
+		0.0f, 0.5f, 0.0f, .2f, .2f, .02f,
+
+		0.5f, 0.0f, 0.0f, .2f, .2f, .02f,
+		0.5f, 0.5f, 0.0f, .2f, .2f, .02f,
+		0.5f, 0.0f, 0.5f, .2f, .2f, .02f,
+		0.5f, 0.5f, 0.5f, .2f, .2f, .02f,
+
+		0.0f, 0.0f, 0.5f, .2f, .2f, .02f,
+		0.5f, 0.0f, 0.5f, .2f, .2f, .02f,
+		0.5f, 0.5f, 0.5f, .2f, .2f, .02f,
+		0.0f, 0.5f, 0.5f, .2f, .2f, .02f,
+
+		0.0f, 0.0f, 0.5f, .2f, .2f, .02f,
+		0.0f, 0.5f, 0.5f, .2f, .2f, .02f,
+		0.0f, 0.5f, 0.0f, .2f, .2f, .02f,
+		0.0f, 0.0f, 0.0f, .2f, .2f, .02f,
+
+		0.5f, 0.5f, 0.5f, .2f, .2f, .02f,
+		0.5f, 0.5f, 0.0f, .2f, .2f, .02f,
+		0.0f, 0.5f, 0.0f, .2f, .2f, .02f,
+		0.0f, 0.5f, 0.5f, .2f, .2f, .02f,
+
+		0.0f, 0.0f, 0.0f, .2f, .2f, .02f,
+		0.5f, 0.0f, 0.0f, .2f, .2f, .02f,
+		0.5f, 0.0f, 0.5f, .2f, .2f, .02f,
+		0.0f, 0.0f, 0.5f, .2f, .2f, .02f
+	};
+	//0.9f, 0.9f, 0.0f,
+	float chair_back[] = {
+		0.0f, 0.0f, 0.0f, 0.9f, 0.9f, 0.0f,
+		0.5f, 0.0f, 0.0f, 0.9f, 0.9f, 0.0f,
+		0.5f, 0.5f, 0.0f, 0.9f, 0.9f, 0.0f,
+		0.0f, 0.5f, 0.0f, 0.9f, 0.9f, 0.0f,
+
+		0.5f, 0.0f, 0.0f, 0.9f, 0.9f, 0.0f,
+		0.5f, 0.5f, 0.0f, 0.9f, 0.9f, 0.0f,
+		0.5f, 0.0f, 0.5f, 0.9f, 0.9f, 0.0f,
+		0.5f, 0.5f, 0.5f, 0.9f, 0.9f, 0.0f,
+
+		0.0f, 0.0f, 0.5f, 0.9f, 0.9f, 0.0f,
+		0.5f, 0.0f, 0.5f, 0.9f, 0.9f, 0.0f,
+		0.5f, 0.5f, 0.5f, 0.9f, 0.9f, 0.0f,
+		0.0f, 0.5f, 0.5f, 0.9f, 0.9f, 0.0f,
+
+		0.0f, 0.0f, 0.5f, 0.9f, 0.9f, 0.0f,
+		0.0f, 0.5f, 0.5f, 0.9f, 0.9f, 0.0f,
+		0.0f, 0.5f, 0.0f, 0.9f, 0.9f, 0.0f,
+		0.0f, 0.0f, 0.0f, 0.9f, 0.9f, 0.0f,
+
+		0.5f, 0.5f, 0.5f, 0.9f, 0.9f, 0.0f,
+		0.5f, 0.5f, 0.0f, 0.9f, 0.9f, 0.0f,
+		0.0f, 0.5f, 0.0f, 0.9f, 0.9f, 0.0f,
+		0.0f, 0.5f, 0.5f, 0.9f, 0.9f, 0.0f,
+
+		0.0f, 0.0f, 0.0f, 0.9f, 0.9f, 0.0f,
+		0.5f, 0.0f, 0.0f, 0.9f, 0.9f, 0.0f,
+		0.5f, 0.0f, 0.5f, 0.9f, 0.9f, 0.0f,
+		0.0f, 0.0f, 0.5f, 0.9f, 0.9f, 0.0f
+	};
+
 	unsigned int cube_indices[] = {
 		0, 3, 2,
 		2, 1, 0,
@@ -256,10 +296,6 @@ int main()
 		22, 23, 20
 	};
 
-
-	//unsigned int* vertex_arr = vertex_array(table_top, cube_indices);
-	//unsigned int VAO = vertex_arr[0], VBO = vertex_arr[1], EBO = vertex_arr[2];
-	//cout << VAO << endl;
 	unsigned int VBO, VAO, EBO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -300,6 +336,38 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO3);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(chair_leg), chair_leg, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO3);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	//color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
+	glEnableVertexAttribArray(1);
+
+	unsigned int VBO4, VAO4, EBO4;
+	glGenVertexArrays(1, &VAO4);
+	glGenBuffers(1, &VBO4);
+	glGenBuffers(1, &EBO4);
+	glBindVertexArray(VAO4);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO4);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(chair_pillar), chair_pillar, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO4);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	//color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
+	glEnableVertexAttribArray(1);
+
+	unsigned int VBO5, VAO5, EBO5;
+	glGenVertexArrays(1, &VAO5);
+	glGenBuffers(1, &VBO5);
+	glGenBuffers(1, &EBO5);
+	glBindVertexArray(VAO5);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO5);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(chair_back), chair_back, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO5);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
 	// position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
@@ -366,29 +434,44 @@ int main()
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
 		//chair_Top
-		model = transforamtion(0.5, -.35, 1, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1, 0.1, 1);
+		model = transforamtion(0.4, -.35, .8, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1, 0.1, 1);
 		ourShader.setMat4("model", model);
 		glBindVertexArray(VAO3);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		//c_Leg
-		model = transforamtion(0.5, -.35, 1, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, -.8, 0.1);
+		model = transforamtion(0.4, -.35, .8, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, -.8, 0.1);
 		ourShader.setMat4("model", model);
 		glBindVertexArray(VAO3);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		//c_Leg
-		model = transforamtion(.95, -.35, 1, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, -.8, 0.1);
+		model = transforamtion(.85, -.35, .8, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, -.8, 0.1);
 		ourShader.setMat4("model", model);
 		glBindVertexArray(VAO3);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		//c_Leg
-		model = transforamtion(.95, -.35, 1.45, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, -.8, 0.1);
+		model = transforamtion(.85, -.35, 1.25, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, -.8, 0.1);
 		ourShader.setMat4("model", model);
 		glBindVertexArray(VAO3);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		//c_Leg
-		model = transforamtion(0.5, -.35, 1.45, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, -.8, 0.1);
+		model = transforamtion(0.4, -.35, 1.25, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, -.8, 0.1);
 		ourShader.setMat4("model", model);
 		glBindVertexArray(VAO3);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//c_P
+		model = transforamtion(0.75, -.3, 1.2, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, .3, 0.1);
+		ourShader.setMat4("model", model);
+		glBindVertexArray(VAO4);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//c_P
+		model = transforamtion(0.525, -.3, 1.2, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, .3, 0.1);
+		ourShader.setMat4("model", model);
+		glBindVertexArray(VAO4);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		//c_B
+		model = transforamtion(0.475, .1, 1.175, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.8, -.5, 0.2);
+		ourShader.setMat4("model", model);
+		glBindVertexArray(VAO5);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		// render boxes
 		//for (unsigned int i = 0; i < 10; i++)
@@ -417,6 +500,15 @@ int main()
 	glDeleteVertexArrays(1, &VAO2);
 	glDeleteBuffers(1, &VBO2);
 	glDeleteBuffers(1, &EBO2);
+	glDeleteVertexArrays(1, &VAO3);
+	glDeleteBuffers(1, &VBO3);
+	glDeleteBuffers(1, &EBO3);
+	glDeleteVertexArrays(1, &VAO4);
+	glDeleteBuffers(1, &VBO4);
+	glDeleteBuffers(1, &EBO4);
+	glDeleteVertexArrays(1, &VAO5);
+	glDeleteBuffers(1, &VBO5);
+	glDeleteBuffers(1, &EBO5);
 
 	// glfw: terminate, clearing all previously allocated GLFW resources.
 	// ------------------------------------------------------------------
