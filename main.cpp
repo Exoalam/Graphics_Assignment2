@@ -441,6 +441,71 @@ int main()
 		0.5f, 0.0f, 0.5f, 0.29f, 0.0f, 0.29f,
 		0.0f, 0.0f, 0.5f, 0.29f, 0.0f, 0.29f
 	};
+	//0.95f, 0.95f, 0.95f,
+	float ceiling[] = {
+	0.0f, 0.0f, 0.0f, 0.95f, 0.95f, 0.95f,
+	0.5f, 0.0f, 0.0f, 0.95f, 0.95f, 0.95f,
+	0.5f, 0.5f, 0.0f, 0.95f, 0.95f, 0.95f,
+	0.0f, 0.5f, 0.0f, 0.95f, 0.95f, 0.95f,
+
+	0.5f, 0.0f, 0.0f, 0.95f, 0.95f, 0.95f,
+	0.5f, 0.5f, 0.0f, 0.95f, 0.95f, 0.95f,
+	0.5f, 0.0f, 0.5f, 0.95f, 0.95f, 0.95f,
+	0.5f, 0.5f, 0.5f, 0.95f, 0.95f, 0.95f,
+
+	0.0f, 0.0f, 0.5f, 0.95f, 0.95f, 0.95f,
+	0.5f, 0.0f, 0.5f, 0.95f, 0.95f, 0.95f,
+	0.5f, 0.5f, 0.5f, 0.95f, 0.95f, 0.95f,
+	0.0f, 0.5f, 0.5f, 0.95f, 0.95f, 0.95f,
+
+	0.0f, 0.0f, 0.5f, 0.95f, 0.95f, 0.95f,
+	0.0f, 0.5f, 0.5f, 0.95f, 0.95f, 0.95f,
+	0.0f, 0.5f, 0.0f, 0.95f, 0.95f, 0.95f,
+	0.0f, 0.0f, 0.0f, 0.95f, 0.95f, 0.95f,
+
+	0.5f, 0.5f, 0.5f, 0.95f, 0.95f, 0.95f,
+	0.5f, 0.5f, 0.0f, 0.95f, 0.95f, 0.95f,
+	0.0f, 0.5f, 0.0f, 0.95f, 0.95f, 0.95f,
+	0.0f, 0.5f, 0.5f, 0.95f, 0.95f, 0.95f,
+
+	0.0f, 0.0f, 0.0f, 0.95f, 0.95f, 0.95f,
+	0.5f, 0.0f, 0.0f, 0.95f, 0.95f, 0.95f,
+	0.5f, 0.0f, 0.5f, 0.95f, 0.95f, 0.95f,
+	0.0f, 0.0f, 0.5f, 0.95f, 0.95f, 0.95f
+	};
+
+	//1.0f, 1.0f, 1.0f,
+	float fan_holder[] = {
+		0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+		0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+		0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+		0.0f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+
+		0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+		0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+		0.5f, 0.0f, 0.5f, 1.0f, 1.0f, 1.0f,
+		0.5f, 0.5f, 0.5f, 1.0f, 1.0f, 1.0f,
+
+		0.0f, 0.0f, 0.5f, 1.0f, 1.0f, 1.0f,
+		0.5f, 0.0f, 0.5f, 1.0f, 1.0f, 1.0f,
+		0.5f, 0.5f, 0.5f, 1.0f, 1.0f, 1.0f,
+		0.0f, 0.5f, 0.5f, 1.0f, 1.0f, 1.0f,
+
+		0.0f, 0.0f, 0.5f, 1.0f, 1.0f, 1.0f,
+		0.0f, 0.5f, 0.5f, 1.0f, 1.0f, 1.0f,
+		0.0f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+		0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+
+		0.5f, 0.5f, 0.5f, 1.0f, 1.0f, 1.0f,
+		0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+		0.0f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+		0.0f, 0.5f, 0.5f, 1.0f, 1.0f, 1.0f,
+
+		0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+		0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+		0.5f, 0.0f, 0.5f, 1.0f, 1.0f, 1.0f,
+		0.0f, 0.0f, 0.5f, 1.0f, 1.0f, 1.0f
+	};
 	
 	unsigned int cube_indices[] = {
 		0, 3, 2,
@@ -622,6 +687,21 @@ int main()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
 	glEnableVertexAttribArray(1);
 
+	unsigned int VBOT, VAOT, EBOT;
+	glGenVertexArrays(1, &VAOT);
+	glGenBuffers(1, &VBOT);
+	glGenBuffers(1, &EBOT);
+	glBindVertexArray(VAOT);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOT);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(ceiling), ceiling, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOT);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	//color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
+	glEnableVertexAttribArray(1);
 	Table_Chair table_chair[16];
 	while (!glfwWindowShouldClose(window))
 	{
@@ -666,7 +746,10 @@ int main()
 			shiftz = 0;
 			shiftx += 2;
 		}
-
+		Table_Chair tc;
+		tc.tox = 5;
+		tc.toz = -8.5;
+		ourShader = tc.local_rotation(ourShader, VAO, VAO2, VAO3, VAO4, VAO5, 135);
 		//Floor
 		model = transforamtion(-2.5, -.8, -9, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 20, 0.1, 24);
 		ourShader.setMat4("model", model);
@@ -709,6 +792,12 @@ int main()
 		model = transforamtion(6.75, -.75, -6, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1.5, 4, 3);
 		ourShader.setMat4("model", model);
 		glBindVertexArray(VAOC);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+		//Ceiling
+		model = transforamtion(-2.5, 2.75, -9, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 20, 0.1, 24);
+		ourShader.setMat4("model", model);
+		glBindVertexArray(VAOT);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		// render boxes
 		//for (unsigned int i = 0; i < 10; i++)
