@@ -506,6 +506,70 @@ int main()
 		0.5f, 0.0f, 0.5f, 1.0f, 1.0f, 1.0f,
 		0.0f, 0.0f, 0.5f, 1.0f, 1.0f, 1.0f
 	};
+	//.44f, .22f, .05f,
+	float fan_pivot[] = {
+	0.0f, 0.0f, 0.0f, .44f, .22f, .05f,
+	0.5f, 0.0f, 0.0f, .44f, .22f, .05f,
+	0.5f, 0.5f, 0.0f, .44f, .22f, .05f,
+	0.0f, 0.5f, 0.0f, .44f, .22f, .05f,
+
+	0.5f, 0.0f, 0.0f, .44f, .22f, .05f,
+	0.5f, 0.5f, 0.0f, .44f, .22f, .05f,
+	0.5f, 0.0f, 0.5f, .44f, .22f, .05f,
+	0.5f, 0.5f, 0.5f, .44f, .22f, .05f,
+
+	0.0f, 0.0f, 0.5f, .44f, .22f, .05f,
+	0.5f, 0.0f, 0.5f, .44f, .22f, .05f,
+	0.5f, 0.5f, 0.5f, .44f, .22f, .05f,
+	0.0f, 0.5f, 0.5f, .44f, .22f, .05f,
+
+	0.0f, 0.0f, 0.5f, .44f, .22f, .05f,
+	0.0f, 0.5f, 0.5f, .44f, .22f, .05f,
+	0.0f, 0.5f, 0.0f, .44f, .22f, .05f,
+	0.0f, 0.0f, 0.0f, .44f, .22f, .05f,
+
+	0.5f, 0.5f, 0.5f, .44f, .22f, .05f,
+	0.5f, 0.5f, 0.0f, .44f, .22f, .05f,
+	0.0f, 0.5f, 0.0f, .44f, .22f, .05f,
+	0.0f, 0.5f, 0.5f, .44f, .22f, .05f,
+
+	0.0f, 0.0f, 0.0f, .44f, .22f, .05f,
+	0.5f, 0.0f, 0.0f, .44f, .22f, .05f,
+	0.5f, 0.0f, 0.5f, .44f, .22f, .05f,
+	0.0f, 0.0f, 0.5f, .44f, .22f, .05f
+	};
+	//.0f, .0f, .42f,
+	float fan_blade[] = {
+	0.0f, 0.0f, 0.0f, .0f, .0f, .42f,
+	0.5f, 0.0f, 0.0f, .0f, .0f, .42f,
+	0.5f, 0.5f, 0.0f, .0f, .0f, .42f,
+	0.0f, 0.5f, 0.0f, .0f, .0f, .42f,
+
+	0.5f, 0.0f, 0.0f, .0f, .0f, .42f,
+	0.5f, 0.5f, 0.0f, .0f, .0f, .42f,
+	0.5f, 0.0f, 0.5f, .0f, .0f, .42f,
+	0.5f, 0.5f, 0.5f, .0f, .0f, .42f,
+
+	0.0f, 0.0f, 0.5f, .0f, .0f, .42f,
+	0.5f, 0.0f, 0.5f, .0f, .0f, .42f,
+	0.5f, 0.5f, 0.5f, .0f, .0f, .42f,
+	0.0f, 0.5f, 0.5f, .0f, .0f, .42f,
+
+	0.0f, 0.0f, 0.5f, .0f, .0f, .42f,
+	0.0f, 0.5f, 0.5f, .0f, .0f, .42f,
+	0.0f, 0.5f, 0.0f, .0f, .0f, .42f,
+	0.0f, 0.0f, 0.0f, .0f, .0f, .42f,
+
+	0.5f, 0.5f, 0.5f, .0f, .0f, .42f,
+	0.5f, 0.5f, 0.0f, .0f, .0f, .42f,
+	0.0f, 0.5f, 0.0f, .0f, .0f, .42f,
+	0.0f, 0.5f, 0.5f, .0f, .0f, .42f,
+
+	0.0f, 0.0f, 0.0f, .0f, .0f, .42f,
+	0.5f, 0.0f, 0.0f, .0f, .0f, .42f,
+	0.5f, 0.0f, 0.5f, .0f, .0f, .42f,
+	0.0f, 0.0f, 0.5f, .0f, .0f, .42f
+	};
 	
 	unsigned int cube_indices[] = {
 		0, 3, 2,
@@ -702,6 +766,56 @@ int main()
 	//color attribute
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
 	glEnableVertexAttribArray(1);
+
+	//Fan
+	unsigned int VBOF1, VAOF1, EBOF1;
+	glGenVertexArrays(1, &VAOF1);
+	glGenBuffers(1, &VBOF1);
+	glGenBuffers(1, &EBOF1);
+	glBindVertexArray(VAOF1);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOF1);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(fan_holder), fan_holder, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOF1);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	//color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
+	glEnableVertexAttribArray(1);
+
+	unsigned int VBOF2, VAOF2, EBOF2;
+	glGenVertexArrays(1, &VAOF2);
+	glGenBuffers(1, &VBOF2);
+	glGenBuffers(1, &EBOF2);
+	glBindVertexArray(VAOF2);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOF2);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(fan_pivot), fan_pivot, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOF2);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	//color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
+	glEnableVertexAttribArray(1);
+
+	unsigned int VBOF3, VAOF3, EBOF3;
+	glGenVertexArrays(1, &VAOF3);
+	glGenBuffers(1, &VBOF3);
+	glGenBuffers(1, &EBOF3);
+	glBindVertexArray(VAOF3);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOF3);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(fan_blade), fan_blade, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOF3);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	//color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
+	glEnableVertexAttribArray(1);
+
 	Table_Chair table_chair[16];
 	while (!glfwWindowShouldClose(window))
 	{
@@ -799,6 +913,17 @@ int main()
 		ourShader.setMat4("model", model);
 		glBindVertexArray(VAOT);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+		model = transforamtion(2, 2.5, -6, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1, .5, 1);
+		ourShader.setMat4("model", model);
+		glBindVertexArray(VAOF1);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+		model = transforamtion(2, 2.25, -6, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .5, .75, .5);
+		ourShader.setMat4("model", model);
+		glBindVertexArray(VAOF2);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
 		// render boxes
 		//for (unsigned int i = 0; i < 10; i++)
 		//{

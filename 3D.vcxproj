@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="basic_camera.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="fan.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="table_chair.h" />
   </ItemGroup>
