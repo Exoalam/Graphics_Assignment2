@@ -12,7 +12,16 @@
 
 class Table_Chair {
 public:
+	float tox, toy, toz;
+	Table_Chair(float x = 0, float y = 0, float z = 0) {
+		tox = x;
+		toy = y;
+		toz = z;
+	}
 	glm::mat4 transforamtion(float tx, float ty, float tz, float rx, float ry, float rz, float sx, float sy, float sz) {
+		tx += tox;
+		ty += toy;
+		tz += toz;
 		glm::mat4 identityMatrix = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
 		glm::mat4 translateMatrix, rotateXMatrix, rotateYMatrix, rotateZMatrix, scaleMatrix, model;
 		translateMatrix = glm::translate(identityMatrix, glm::vec3(tx, ty, tz));
@@ -95,7 +104,7 @@ public:
 		glBindVertexArray(VAO5);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		return ourShader;
-	}
+	} 
 };
 
 

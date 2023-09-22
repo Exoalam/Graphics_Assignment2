@@ -411,6 +411,9 @@ int main()
 		Table_Chair table_chair;
 		ourShader = table_chair.ret_shader(ourShader, VAO, VAO2, VAO3, VAO4, VAO5);
 
+		Table_Chair table_chair2(2,0,0);
+		ourShader = table_chair2.ret_shader(ourShader, VAO, VAO2, VAO3, VAO4, VAO5);
+
 		// render boxes
 		//for (unsigned int i = 0; i < 10; i++)
 		//{
