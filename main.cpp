@@ -408,6 +408,39 @@ int main()
 		0.5f, 0.0f, 0.5f, 0.0f, 0.0f, 0.0f,
 		0.0f, 0.0f, 0.5f, 0.0f, 0.0f, 0.0f
 	};
+
+	//0.29f, 0.0f, 0.29f,
+	float cabinate[] = {
+		0.0f, 0.0f, 0.0f, 0.29f, 0.0f, 0.29f,
+		0.5f, 0.0f, 0.0f, 0.29f, 0.0f, 0.29f,
+		0.5f, 0.5f, 0.0f, 0.29f, 0.0f, 0.29f,
+		0.0f, 0.5f, 0.0f, 0.29f, 0.0f, 0.29f,
+
+		0.5f, 0.0f, 0.0f, 0.29f, 0.0f, 0.29f,
+		0.5f, 0.5f, 0.0f, 0.29f, 0.0f, 0.29f,
+		0.5f, 0.0f, 0.5f, 0.29f, 0.0f, 0.29f,
+		0.5f, 0.5f, 0.5f, 0.29f, 0.0f, 0.29f,
+
+		0.0f, 0.0f, 0.5f, 0.29f, 0.0f, 0.29f,
+		0.5f, 0.0f, 0.5f, 0.29f, 0.0f, 0.29f,
+		0.5f, 0.5f, 0.5f, 0.29f, 0.0f, 0.29f,
+		0.0f, 0.5f, 0.5f, 0.29f, 0.0f, 0.29f,
+
+		0.0f, 0.0f, 0.5f, 0.29f, 0.0f, 0.29f,
+		0.0f, 0.5f, 0.5f, 0.29f, 0.0f, 0.29f,
+		0.0f, 0.5f, 0.0f, 0.29f, 0.0f, 0.29f,
+		0.0f, 0.0f, 0.0f, 0.29f, 0.0f, 0.29f,
+
+		0.5f, 0.5f, 0.5f, 0.29f, 0.0f, 0.29f,
+		0.5f, 0.5f, 0.0f, 0.29f, 0.0f, 0.29f,
+		0.0f, 0.5f, 0.0f, 0.29f, 0.0f, 0.29f,
+		0.0f, 0.5f, 0.5f, 0.29f, 0.0f, 0.29f,
+
+		0.0f, 0.0f, 0.0f, 0.29f, 0.0f, 0.29f,
+		0.5f, 0.0f, 0.0f, 0.29f, 0.0f, 0.29f,
+		0.5f, 0.0f, 0.5f, 0.29f, 0.0f, 0.29f,
+		0.0f, 0.0f, 0.5f, 0.29f, 0.0f, 0.29f
+	};
 	
 	unsigned int cube_indices[] = {
 		0, 3, 2,
@@ -573,6 +606,22 @@ int main()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
 	glEnableVertexAttribArray(1);
 
+	unsigned int VBOC, VAOC, EBOC;
+	glGenVertexArrays(1, &VAOC);
+	glGenBuffers(1, &VBOC);
+	glGenBuffers(1, &EBOC);
+	glBindVertexArray(VAOC);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOC);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(cabinate), cabinate, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOC);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	//color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
+	glEnableVertexAttribArray(1);
+
 	Table_Chair table_chair[16];
 	while (!glfwWindowShouldClose(window))
 	{
@@ -625,23 +674,23 @@ int main()
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
 		//Wall1
-		model = transforamtion(-2.5, -.75, -9, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 20, 6, 0.2);
+		model = transforamtion(-2.5, -.75, -9, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 20, 7, 0.2);
 		ourShader.setMat4("model", model);
 		glBindVertexArray(VAOW1);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
-		model = transforamtion(-2.5, -.75, 3, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 20, 6, 0.2);
+		model = transforamtion(-2.5, -.75, 3, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 20, 7, 0.2);
 		ourShader.setMat4("model", model);
 		glBindVertexArray(VAOW1);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
 		//Wall2
-		model = transforamtion(-2.5, -.75, -9, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .2, 6, 24);
+		model = transforamtion(-2.5, -.75, -9, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .2, 7, 24);
 		ourShader.setMat4("model", model);
 		glBindVertexArray(VAOW2);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
-		model = transforamtion(7.5, -.75, -9, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .2, 6, 24);
+		model = transforamtion(7.5, -.75, -9, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .2, 7, 24);
 		ourShader.setMat4("model", model);
 		glBindVertexArray(VAOW2);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
@@ -654,6 +703,12 @@ int main()
 		model = transforamtion(-.6, 0.4, -8.95, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 12.5, 3.5, 0.2);
 		ourShader.setMat4("model", model);
 		glBindVertexArray(VAO4);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
+		//Cabinate
+		model = transforamtion(6.75, -.75, -6, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1.5, 4, 3);
+		ourShader.setMat4("model", model);
+		glBindVertexArray(VAOC);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		// render boxes
 		//for (unsigned int i = 0; i < 10; i++)
