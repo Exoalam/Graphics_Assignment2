@@ -15,6 +15,7 @@
 #include "shader.h"
 #include "camera.h"
 #include "basic_camera.h"
+#include "table_chair.h"
 
 #include <iostream>
 
@@ -407,72 +408,9 @@ int main()
 		//glm::mat4 view = basic_camera.createViewMatrix();
 		ourShader.setMat4("view", view);
 
-		//Table_Top
-		model = transforamtion(0, 0, 0, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 2.5, 0.2, 1.75);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		//Leg
-		model = transforamtion(0, 0, 0, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.2, -1.5, 0.2);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAO2);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		//Leg
-		model = transforamtion(1.15, 0, 0, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.2, -1.5, 0.2);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAO2);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		//Leg
-		model = transforamtion(1.15, 0, .75, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.2, -1.5, 0.2);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAO2);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		//Leg
-		model = transforamtion(0, 0, .75, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.2, -1.5, 0.2);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAO2);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		Table_Chair table_chair;
+		ourShader = table_chair.ret_shader(ourShader, VAO, VAO2, VAO3, VAO4, VAO5);
 
-		//chair_Top
-		model = transforamtion(0.4, -.35, .8, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 1, 0.1, 1);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAO3);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		//c_Leg
-		model = transforamtion(0.4, -.35, .8, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, -.8, 0.1);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAO3);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		//c_Leg
-		model = transforamtion(.85, -.35, .8, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, -.8, 0.1);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAO3);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		//c_Leg
-		model = transforamtion(.85, -.35, 1.25, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, -.8, 0.1);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAO3);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		//c_Leg
-		model = transforamtion(0.4, -.35, 1.25, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, -.8, 0.1);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAO3);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		//c_P
-		model = transforamtion(0.75, -.3, 1.2, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, .3, 0.1);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAO4);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		//c_P
-		model = transforamtion(0.525, -.3, 1.2, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.1, .3, 0.1);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAO4);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		//c_B
-		model = transforamtion(0.475, .1, 1.175, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 0.8, -.5, 0.2);
-		ourShader.setMat4("model", model);
-		glBindVertexArray(VAO5);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		// render boxes
 		//for (unsigned int i = 0; i < 10; i++)
 		//{

@@ -139,6 +139,7 @@
     <ClInclude Include="basic_camera.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="shader.h" />
+    <ClInclude Include="table_chair.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragmentShader.fs" />
