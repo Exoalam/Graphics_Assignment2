@@ -115,28 +115,6 @@ int main()
     // ------------------------------------
     Shader ourShader("vertexShader.vs", "fragmentShader.fs");
 
-    // set up vertex data (and buffer(s)) and configure vertex attributes
-    // ------------------------------------------------------------------
-    /*float cube_vertices[] = {
-        0.0f, 0.0f, 0.0f, 0.3f, 0.8f, 0.5f,
-        0.5f, 0.0f, 0.0f, 0.5f, 0.4f, 0.3f,
-        0.5f, 0.5f, 0.0f, 0.2f, 0.7f, 0.3f,
-        0.0f, 0.5f, 0.0f, 0.6f, 0.2f, 0.8f,
-        0.0f, 0.0f, 0.5f, 0.8f, 0.3f, 0.6f,
-        0.5f, 0.0f, 0.5f, 0.4f, 0.4f, 0.8f,
-        0.5f, 0.5f, 0.5f, 0.2f, 0.3f, 0.6f,
-        0.0f, 0.5f, 0.5f, 0.7f, 0.5f, 0.4f
-    };*/
-    /*float cube_vertices[] = {
-        0.0f, 0.0f, 0.0f,
-        0.5f, 0.0f, 0.0f,
-        0.5f, 0.5f, 0.0f,
-        0.0f, 0.5f, 0.0f,
-        0.0f, 0.0f, 0.5f,
-        0.5f, 0.0f, 0.5f,
-        0.5f, 0.5f, 0.5f,
-        0.0f, 0.5f, 0.5f
-    };*/
     float cube_vertices[] = {
         0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
         0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
@@ -187,81 +165,7 @@ int main()
         20, 21, 22,
         22, 23, 20
     };
-    /*unsigned int cube_indices[] = {
-        0, 3, 2,
-        2, 1, 0,
 
-        1, 2, 6,
-        6, 5, 1,
-
-        5, 6, 7,
-        7 ,4, 5,
-
-        4, 7, 3,
-        3, 0, 4,
-
-        6, 2, 3,
-        3, 7, 6,
-
-        1, 5, 4,
-        4, 0, 1
-    };*/
-    /*float cube_vertices[] = {
-        -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-
-        -0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
-
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-
-        -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f, -0.5f,
-
-        -0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
-    };*/
-    // world space positions of our cubes
-    /*glm::vec3 cubePositions[] = {
-        glm::vec3(0.0f,  0.0f,  0.0f),
-        glm::vec3(2.0f,  5.0f, -15.0f),
-        glm::vec3(-1.5f, -2.2f, -2.5f),
-        glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3(2.4f, -0.4f, -3.5f),
-        glm::vec3(-1.7f,  3.0f, -7.5f),
-        glm::vec3(1.3f, -2.0f, -2.5f),
-        glm::vec3(1.5f,  2.0f, -2.5f),
-        glm::vec3(1.5f,  0.2f, -1.5f),
-        glm::vec3(-1.3f,  1.0f, -1.5f)
-    };*/
     unsigned int VBO, VAO, EBO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -275,9 +179,6 @@ int main()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
 
-    // position attribute
-   // glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    //glEnableVertexAttribArray(0);
 
     // position attribute
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
@@ -288,14 +189,6 @@ int main()
     glEnableVertexAttribArray(1);
 
 
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-
-
-    //ourShader.use();
-
-    // render loop
-    // -----------
     while (!glfwWindowShouldClose(window))
     {
         // per-frame time logic
