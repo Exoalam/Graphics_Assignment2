@@ -276,6 +276,38 @@ int main()
 		0.5f, 0.0f, 0.5f, 0.9f, 0.9f, 0.0f,
 		0.0f, 0.0f, 0.5f, 0.9f, 0.9f, 0.0f
 	};
+	//0.69f, 0.69f, 0.69f,
+	float floor[] = {
+		0.0f, 0.0f, 0.0f, 0.69f, 0.69f, 0.69f,
+		0.5f, 0.0f, 0.0f, 0.69f, 0.69f, 0.69f,
+		0.5f, 0.5f, 0.0f, 0.69f, 0.69f, 0.69f,
+		0.0f, 0.5f, 0.0f, 0.69f, 0.69f, 0.69f,
+
+		0.5f, 0.0f, 0.0f, 0.69f, 0.69f, 0.69f,
+		0.5f, 0.5f, 0.0f, 0.69f, 0.69f, 0.69f,
+		0.5f, 0.0f, 0.5f, 0.69f, 0.69f, 0.69f,
+		0.5f, 0.5f, 0.5f, 0.69f, 0.69f, 0.69f,
+
+		0.0f, 0.0f, 0.5f, 0.69f, 0.69f, 0.69f,
+		0.5f, 0.0f, 0.5f, 0.69f, 0.69f, 0.69f,
+		0.5f, 0.5f, 0.5f, 0.69f, 0.69f, 0.69f,
+		0.0f, 0.5f, 0.5f, 0.69f, 0.69f, 0.69f,
+
+		0.0f, 0.0f, 0.5f, 0.69f, 0.69f, 0.69f,
+		0.0f, 0.5f, 0.5f, 0.69f, 0.69f, 0.69f,
+		0.0f, 0.5f, 0.0f, 0.69f, 0.69f, 0.69f,
+		0.0f, 0.0f, 0.0f, 0.69f, 0.69f, 0.69f,
+
+		0.5f, 0.5f, 0.5f, 0.69f, 0.69f, 0.69f,
+		0.5f, 0.5f, 0.0f, 0.69f, 0.69f, 0.69f,
+		0.0f, 0.5f, 0.0f, 0.69f, 0.69f, 0.69f,
+		0.0f, 0.5f, 0.5f, 0.69f, 0.69f, 0.69f,
+
+		0.0f, 0.0f, 0.0f, 0.69f, 0.69f, 0.69f,
+		0.5f, 0.0f, 0.0f, 0.69f, 0.69f, 0.69f,
+		0.5f, 0.0f, 0.5f, 0.69f, 0.69f, 0.69f,
+		0.0f, 0.0f, 0.5f, 0.69f, 0.69f, 0.69f
+	};
 
 	unsigned int cube_indices[] = {
 		0, 3, 2,
@@ -376,6 +408,23 @@ int main()
 	//color attribute
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
 	glEnableVertexAttribArray(1);
+
+	unsigned int VBOG, VAOG, EBOG;
+	glGenVertexArrays(1, &VAOG);
+	glGenBuffers(1, &VBOG);
+	glGenBuffers(1, &EBOG);
+	glBindVertexArray(VAOG);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOG);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(floor), floor, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOG);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	//color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
+	glEnableVertexAttribArray(1);
+
 	Table_Chair table_chair[16];
 	while (!glfwWindowShouldClose(window))
 	{
@@ -408,6 +457,7 @@ int main()
 		//glm::mat4 view = basic_camera.createViewMatrix();
 		ourShader.setMat4("view", view);
 
+		//Table_Chair
 		float shiftx = -2, shiftz = 0;
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
@@ -419,7 +469,11 @@ int main()
 			shiftz = 0;
 			shiftx += 2;
 		}
-		
+		//Floor
+		model = transforamtion(-2.5, -.8, -6, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 16, 0.1, 16);
+		ourShader.setMat4("model", model);
+		glBindVertexArray(VAOG);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
 
 		// render boxes

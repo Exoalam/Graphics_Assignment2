@@ -11,6 +11,7 @@
 
 
 class Table_Chair {
+
 public:
 	float tox, toy, toz;
 	Table_Chair(float x = 0, float y = 0, float z = 0) {
