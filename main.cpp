@@ -920,11 +920,14 @@ int main()
 		glBindVertexArray(VAOF1);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
+		model = transforamtion(2.125, 2.25, -5.875, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .5, .75, .5);
+		ourShader.setMat4("model", model);
+		glBindVertexArray(VAOF2);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+
 		Fan fan;
-		/*ourShader = fan.local_rotation(ourShader, VAOF1, VAOF2, VAOF3);*/
-		
-		ourShader = fan.local_rotation(ourShader, VAOF2, VAOF3, i);
-		i++;
+		ourShader = fan.local_rotation(ourShader, VAOF3, i);
+		i+=5;
 		// render boxes
 		//for (unsigned int i = 0; i < 10; i++)
 		//{
