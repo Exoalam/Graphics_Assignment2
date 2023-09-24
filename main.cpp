@@ -44,8 +44,9 @@ float scale_X = 1.0;
 float scale_Y = 1.0;
 float scale_Z = 1.0;
 bool fan_turn = false;
+bool rotate_around = false;
 // camera
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 2.5f, 3.0f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
@@ -930,6 +931,8 @@ int main()
 
 		if(fan_turn)
 			i+=5;
+		if(rotate_around)
+			camera.ProcessKeyboard(Y_LEFT, deltaTime);
 		// render boxes
 		//for (unsigned int i = 0; i < 10; i++)
 		//{
@@ -1007,13 +1010,38 @@ void processInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
 		camera.ProcessKeyboard(DOWN, deltaTime);
 	}
-
+	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
+		camera.ProcessKeyboard(P_UP, deltaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS) {
+		camera.ProcessKeyboard(P_DOWN, deltaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS) {
+		camera.ProcessKeyboard(Y_LEFT, deltaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS) {
+		camera.ProcessKeyboard(Y_RIGHT, deltaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
+		camera.ProcessKeyboard(R_LEFT, deltaTime);
+	}
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+		camera.ProcessKeyboard(R_RIGHT, deltaTime);
+	}
 	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS) {
 		if (!fan_turn) {
 			fan_turn = true;
 		}
 		else {
 			fan_turn = false;
+		}
+	}
+	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) {
+		if (!rotate_around) {
+			rotate_around = true;
+		}
+		else {
+			rotate_around = false;
 		}
 	}
 
