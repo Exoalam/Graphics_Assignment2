@@ -43,7 +43,7 @@ float translate_Z = 0.0;
 float scale_X = 1.0;
 float scale_Y = 1.0;
 float scale_Z = 1.0;
-
+bool fan_turn = false;
 // camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = SCR_WIDTH / 2.0f;
@@ -927,7 +927,9 @@ int main()
 
 		Fan fan;
 		ourShader = fan.local_rotation(ourShader, VAOF3, i);
-		i+=5;
+
+		if(fan_turn)
+			i+=5;
 		// render boxes
 		//for (unsigned int i = 0; i < 10; i++)
 		//{
@@ -1000,6 +1002,14 @@ void processInput(GLFWwindow* window)
 		camera.ProcessKeyboard(RIGHT, deltaTime);
 	}
 
+	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS) {
+		if (!fan_turn) {
+			fan_turn = true;
+		}
+		else {
+			fan_turn = false;
+		}
+	}
 	if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
 	{
 		if (rotateAxis_X) rotateAngle_X -= 1;
