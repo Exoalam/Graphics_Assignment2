@@ -49,6 +49,10 @@ public:
     glm::vec3 Up;
     glm::vec3 Right;
     glm::vec3 WorldUp;
+    glm::vec3 Target;
+    float Distance;    
+    float Theta;      
+    float Phi;
     // euler Angles
     float Yaw;
     float Pitch;
@@ -59,7 +63,7 @@ public:
     float Zoom;
 
     // constructor with vectors
-    Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH, float roll = ROLL) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
+    Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH, float roll = ROLL ) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
     {
         Position = position;
         WorldUp = up;
@@ -77,11 +81,25 @@ public:
         Pitch = pitch;
         updateCameraVectors();
     }
-
+    void Orbit(float dTheta, float dPhi) {
+        Target = GetViewMatrix()[3];
+        Distance = glm::distance(Target, Position);
+        Theta += dTheta;
+        Phi = glm::clamp(Phi + dPhi, 0.1f, glm::radians(179.9f));  // Avoids gimbal lock
+    }
     // returns the view matrix calculated using Euler Angles and the LookAt Matrix
     glm::mat4 GetViewMatrix()
     {
         return glm::lookAt(Position, Position + Front, Up);
+    }
+    glm::vec3 GetPosition() const {
+        float x = Distance * sin(Phi) * cos(Theta);
+        float y = Distance * sin(Phi) * sin(Theta);
+        float z = Distance * cos(Phi);
+        return Target + glm::vec3(x, y, z);
+    }
+    glm::mat4 GetViewMatrixOrbit() const {
+        return glm::lookAt(GetPosition(), Target, glm::vec3(0.0f, 1.0f, 0.0f));
     }
 
     // processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)

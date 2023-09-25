@@ -845,7 +845,11 @@ int main()
 		ourShader.setMat4("projection", projection);
 
 		// camera/view transformation
+		float degree = 0;
 		glm::mat4 view = camera.GetViewMatrix();
+		float r = glm::length(camera.Position-glm::vec3(view[3]));
+		//std::cout << "Vector: (" << camera.Position.x << ", " << camera.Position.y << ", " << camera.Position.z << ")" << std::endl;
+		//std::cout << "Vector: (" << -glm::vec3(view[2]).x << ", " << -glm::vec3(view[2]).y << ", " << -glm::vec3(view[2]).z << ")" << std::endl;
 		//glm::mat4 view = basic_camera.createViewMatrix();
 		ourShader.setMat4("view", view);
 		/*glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);*/
