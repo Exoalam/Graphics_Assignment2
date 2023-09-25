@@ -592,6 +592,55 @@ int main()
 		22, 23, 20
 	};
 
+	float border[] = {
+		0.0f, 0.0f, 0.0f, .0f, .0f, .0f,
+		0.5f, 0.0f, 0.0f, .0f, .0f, .0f,
+		0.5f, 0.5f, 0.0f, .0f, .0f, .0f,
+		0.0f, 0.5f, 0.0f, .0f, .0f, .0f,
+
+		0.5f, 0.0f, 0.0f, .0f, .0f, .0f,
+		0.5f, 0.5f, 0.0f, .0f, .0f, .0f,
+		0.5f, 0.0f, 0.5f, .0f, .0f, .0f,
+		0.5f, 0.5f, 0.5f, .0f, .0f, .0f,
+
+		0.0f, 0.0f, 0.5f, .0f, .0f, .0f,
+		0.5f, 0.0f, 0.5f, .0f, .0f, .0f,
+		0.5f, 0.5f, 0.5f, .0f, .0f, .0f,
+		0.0f, 0.5f, 0.5f, .0f, .0f, .0f,
+
+		0.0f, 0.0f, 0.5f, .0f, .0f, .0f,
+		0.0f, 0.5f, 0.5f, .0f, .0f, .0f,
+		0.0f, 0.5f, 0.0f, .0f, .0f, .0f,
+		0.0f, 0.0f, 0.0f, .0f, .0f, .0f,
+
+		0.5f, 0.5f, 0.5f, .0f, .0f, .0f,
+		0.5f, 0.5f, 0.0f, .0f, .0f, .0f,
+		0.0f, 0.5f, 0.0f, .0f, .0f, .0f,
+		0.0f, 0.5f, 0.5f, .0f, .0f, .0f,
+
+		0.0f, 0.0f, 0.0f, .0f, .0f, .0f,
+		0.5f, 0.0f, 0.0f, .0f, .0f, .0f,
+		0.5f, 0.0f, 0.5f, .0f, .0f, .0f,
+		0.0f, 0.0f, 0.5f, .0f, .0f, .0f
+	};
+	unsigned int VBOL, VAOL, EBOL;
+	glGenVertexArrays(1, &VAOL);
+	glGenBuffers(1, &VBOL);
+	glGenBuffers(1, &EBOL);
+	glBindVertexArray(VAOL);
+	glBindBuffer(GL_ARRAY_BUFFER, VBOL);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(border), border, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBOL);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cube_indices), cube_indices, GL_STATIC_DRAW);
+
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	//color attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)12);
+	glEnableVertexAttribArray(1);
+
 	unsigned int VBO, VAO, EBO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -930,6 +979,24 @@ int main()
 		glBindVertexArray(VAOF2);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
+		for (int i = 0; i < 4; i++) {
+			model = transforamtion(-.4+2*i, -.75, -9, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .01, .01, 24);
+			ourShader.setMat4("model", model);
+			glBindVertexArray(VAOL);
+			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		}
+
+		for (int i = 0; i < 5; i++) {
+			model = transforamtion(-2.4, -.75, -7 + 2 * i, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, 24, .01, .01);
+			ourShader.setMat4("model", model);
+			glBindVertexArray(VAOL);
+			glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+		}
+
+		model = transforamtion(6.74, -.76, -5.25, rotateAngle_X, rotateAngle_Y, rotateAngle_Z, .01, 4, .01);
+		ourShader.setMat4("model", model);
+		glBindVertexArray(VAOL);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		Fan fan;
 		ourShader = fan.local_rotation(ourShader, VAOF3, i);
 
